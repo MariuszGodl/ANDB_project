@@ -1,242 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Excellence Scholarship | Home</title>
-    <style>
-        /* --- CSS STYLING --- */
-        
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+{% extends 'base.html' %}
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f9;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+{% block title %}Home | Global Excellence Scholarship{% endblock %}
 
-        /* Navigation Bar Styles */
-        header {
-            background-color: #003366; /* Academic Navy Blue */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between; /* Spacing between Login and Nav Links */
-            align-items: center;
-            padding: 1rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* The Max Left Login Button */
-        .login-btn {
-            background-color: #f1c40f; /* Gold accent */
-            color: #003366;
-            padding: 10px 25px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .login-btn:hover {
-            background-color: #d4ac0d;
-        }
-
-        /* The 4 Main Links */
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links li a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links li a:hover {
-            color: #f1c40f;
-            border-bottom: 2px solid #f1c40f;
-        }
-
-        /* Hero Section */
-        .hero {
-            background-color: #e8ecf1;
-            padding: 4rem 5%;
-            text-align: center;
-            border-bottom: 5px solid #003366;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            color: #003366;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: #555;
-            max-width: 700px;
-            margin: 0 auto 2rem auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: #003366;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-        }
-
-        /* Main Content / Filler */
-        .container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            flex: 1; /* Pushes footer down */
-        }
-
-        .section {
-            margin-bottom: 3rem;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .section h2 {
-            color: #003366;
-            margin-bottom: 1rem;
-            border-left: 5px solid #f1c40f;
-            padding-left: 10px;
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: #222;
-            color: #ddd;
-            padding: 3rem 5%;
-            margin-top: auto;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-            gap: 2rem;
-        }
-
-        .footer-section h3 {
-            color: white;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #555;
-            padding-bottom: 10px;
-            display: inline-block;
-        }
-
-        .footer-section p {
-            margin-bottom: 10px;
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #444;
-            font-size: 0.9rem;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <nav>
-            <a href="login.html" class="login-btn">Log In</a>
-
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="apply.html">Apply</a></li>
-                <li><a href="scholarships.html">Scholarships</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    
-
-[Image of university students studying on campus lawn]
-
-
-    <section class="hero">
-        <h1>Empower Your Future</h1>
-        <p>The 2025 Global Excellence Scholarship program is now open. We are dedicated to supporting the next generation of leaders and innovators.</p>
-        <a href="apply.html" class="cta-button">Start Application</a>
+{% block content %}
+    <section class="hero" style="background-color: #e8ecf1; padding: 4rem 5%; text-align: center; border-bottom: 5px solid #003366;">
+        <h1 style="color: #003366; font-size: 2.5rem; margin-bottom: 1rem;">Empower Your Future</h1>
+        <p style="color: #555; font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem auto;">
+            The 2025 Global Excellence Scholarship program is now open.
+        </p>
+        <a href="/apply" class="cta-button" style="background-color: #003366; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px;">Start Application</a>
     </section>
 
-    <main class="container">
-        <div class="section">
-            <h2>About the Program</h2>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
-            <br>
-            <p>
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris.
-            </p>
+    <main class="container" style="max-width: 1000px; margin: 2rem auto; padding: 0 2rem;">
+        <div class="section" style="background: white; padding: 2rem; margin-bottom: 3rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <h2 style="color: #003366;">About the Program</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
 
-        <div class="section">
-            <h2>Eligibility Criteria</h2>
-            <p>
-                Integer in volutpat libero. Animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
-            </p>
+        <div class="section" style="background: white; padding: 2rem; margin-bottom: 3rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <h2 style="color: #003366;">Eligibility Criteria</h2>
             <ul>
                 <li>Must be enrolled in an accredited institution.</li>
                 <li>Minimum GPA of 3.5 or equivalent.</li>
-                <li>Demonstrated community leadership.</li>
             </ul>
         </div>
     </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Global Institute of Technology</h3>
-                <p>Empowering minds since 1985.</p>
-                <p>Excellence in Education and Research.</p>
-            </div>
-
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p><strong>Address:</strong> 123 University Blvd, Innovation City, ST 90210</p>
-                <p><strong>Email:</strong> admissions@globalinstitute.edu</p>
-                <p><strong>Phone:</strong> +1 (555) 019-2834</p>
-            </div>
-        </div>
-
-        <div class="copyright">
-            &copy; 2025 Global Institute of Technology. All Rights Reserved.
-        </div>
-    </footer>
-
-</body>
-</html>
+{% endblock %}
