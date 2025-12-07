@@ -72,22 +72,3 @@ Homepage: http://127.0.0.1:8000/
 
 Apply Page: http://127.0.0.1:8000/apply/
 
-## 📂 Project Structure
-Plaintext
-
-ANDB_project/
-├── db.sqlite3            # Database file (created after migrate)
-├── manage.py             # Django command-line utility
-├── scholarship/          # Main project configuration (settings, urls)
-├── main/                 # The App containing views and logic
-│   ├── views.py          # Handles page logic (homepage, apply)
-│   ├── models.py         # Database models
-│   └── ...
-└── templates/            # HTML files
-    ├── base.html         # Main skeleton (CSS + Structure)
-    ├── homepage.html     # Home content
-    ├── apply.html        # Application form
-    └── parts/            # Reusable components
-        ├── navbar.html
-        └── footer.html
-
