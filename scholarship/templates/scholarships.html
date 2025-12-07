@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Available Scholarships{% endblock %}
+
+{% block content %}
+<style>
+    .scholarship-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 3rem auto;
+        padding: 0 2rem;
+    }
+
+    .card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        padding: 2rem;
+        transition: transform 0.2s;
+        border-top: 5px solid #003366;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card h3 { color: #003366; margin-bottom: 0.5rem; }
+    .amount { color: #f1c40f; font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; display: block; }
+    .card p { color: #555; margin-bottom: 1.5rem; }
+    
+    .apply-link {
+        color: #003366;
+        font-weight: bold;
+        text-decoration: none;
+        border-bottom: 2px solid #f1c40f;
+    }
+</style>
+
+<div style="text-align: center; margin-top: 3rem;">
+    <h1 style="color: #003366;">Available Opportunities</h1>
+    <p>Explore our funding options for the 2025 academic year.</p>
+</div>
+
+<div class="scholarship-grid">
+    <div class="card">
+        <h3>STEM Innovation Grant</h3>
+        <span class="amount">$10,000 / year</span>
+        <p>For students excelling in Science, Technology, Engineering, or Math. Must have a research project proposal.</p>
+        <a href="{% url 'apply' %}" class="apply-link">Apply Now &rarr;</a>
+    </div>
+
+    <div class="card">
+        <h3>Arts & Humanities Fellowship</h3>
+        <span class="amount">$5,000 / year</span>
+        <p>Supporting creative minds in literature, history, and the arts. Portfolio submission required.</p>
+        <a href="{% url 'apply' %}" class="apply-link">Apply Now &rarr;</a>
+    </div>
+
+    <div class="card">
+        <h3>Future Leaders Award</h3>
+        <span class="amount">Full Tuition</span>
+        <p>Awarded to individuals demonstrating exceptional leadership skills and community service.</p>
+        <a href="{% url 'apply' %}" class="apply-link">Apply Now &rarr;</a>
+    </div>
+</div>
+{% endblock %}
