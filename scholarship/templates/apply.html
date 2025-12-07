@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Apply Now | Global Excellence Scholarship{% endblock %}
+
+{% block content %}
+<style>
+    /* Page-specific styles for the form */
+    .form-container {
+        background: white;
+        max-width: 600px;
+        margin: 3rem auto;
+        padding: 2.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #003366;
+        font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-family: inherit;
+    }
+
+    input:focus, textarea:focus {
+        border-color: #003366;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 51, 102, 0.2);
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background-color: #003366;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .submit-btn:hover {
+        background-color: #002244;
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #003366;
+    }
+</style>
+
+<div class="form-container">
+    <div class="form-header">
+        <h1>Scholarship Application</h1>
+        <p>Please fill out the details below to proceed.</p>
+    </div>
+
+    <form method="POST" action="{% url 'apply' %}">
+        {% csrf_token %} <div class="form-group">
+            <label for="full_name">Full Name</label>
+            <input type="text" id="full_name" name="full_name" placeholder="John Doe" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="gpa">Current GPA</label>
+            <input type="number" id="gpa" name="gpa" step="0.01" min="0" max="4.0" placeholder="3.5" required>
+        </div>
+
+        <div class="form-group">
+            <label for="statement">Personal Statement</label>
+            <textarea id="statement" name="statement" rows="5" placeholder="Tell us why you deserve this scholarship..." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Application</button>
+    </form>
+</div>
+{% endblock %}
