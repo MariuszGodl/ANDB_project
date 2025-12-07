@@ -1,3 +1,8 @@
+## When installing new libraries update req.txt
+Run:
+```bash 
+pip freeze >> req.txt
+```
 # Global Excellence Scholarship Portal
 
 A web-based scholarship application system built with **Django**. This project allows students to view scholarship details and submit applications via a responsive web interface.
@@ -21,49 +26,53 @@ Follow these steps to set up and run the application on your local machine.
 Navigate to the project directory in your terminal:
 ```bash
 cd ANDB_project
-2. Create and Activate Virtual Environment
+```
+### 2. Create and Activate Virtual Environment
 It is recommended to run Django inside a virtual environment to manage dependencies.
 
 Windows:
-
-Bash
+```bash
 
 python -m venv .venv
 .venv\Scripts\activate
+```
 Mac/Linux:
 
-Bash
+```bash
 
 python3 -m venv .venv
 source .venv/bin/activate
+```
 (You should see (.venv) appear at the start of your command line line).
 
-3. Install Dependencies
+### 3. Install Dependencies
 Install Django and any other required packages:
-
-Bash
+``` bash
 
 pip install django
-4. Apply Database Migrations
+```
+### 4. Apply Database Migrations
 Initialize the SQLite database:
 
-Bash
+```bash
 
 python manage.py migrate
-5. Run the Development Server
+```
+### 5. Run the Development Server
 Start the server:
 
-Bash
+```bash
 
 python manage.py runserver
-6. Access the Application
+```
+### 6. Access the Application
 Open your web browser and go to:
 
 Homepage: http://127.0.0.1:8000/
 
 Apply Page: http://127.0.0.1:8000/apply/
 
-📂 Project Structure
+## 📂 Project Structure
 Plaintext
 
 ANDB_project/
@@ -81,3 +90,4 @@ ANDB_project/
     └── parts/            # Reusable components
         ├── navbar.html
         └── footer.html
+
