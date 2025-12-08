@@ -17,6 +17,7 @@ A web-based scholarship application system built with **Django**. This project a
 Before running this project, ensure you have the following installed:
 * **Python** (3.8 or higher)
 * **pip** (Python package installer)
+* **Docker Desktop** (For database management)
 
 ## 🚀 How to Run the Project
 
@@ -50,20 +51,29 @@ Install Django and any other required packages:
 ``` bash
 
 pip install django
+pip install psycopg2-binary
 ```
-### 4. Apply Database Migrations
-Initialize the SQLite database:
+
+### 4. Start Database (Docker)
+Starts the PostgreSQL database container
+```bash
+
+docker-compose up -d
+```
+
+### 5. Apply Database Migrations
+Initialize the database schema:
 
 ```bash
 
-python manage.py migrate
+python scholarship/manage.py migrate
 ```
-### 5. Run the Development Server
+### 6. Run the Development Server
 Start the server:
 
 ```bash
 
-python manage.py runserver
+python scholarship/manage.py runserver
 ```
 ### 6. Access the Application
 Open your web browser and go to:
