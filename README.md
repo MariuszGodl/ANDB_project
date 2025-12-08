@@ -51,6 +51,7 @@ Install Django and any other required packages:
 ``` bash
 
 pip install django
+pip install psycopg2-binary
 ```
 
 ### 4. Start Database (Docker)
@@ -65,14 +66,14 @@ Initialize the database schema:
 
 ```bash
 
-python manage.py migrate
+python scholarship/manage.py migrate
 ```
 ### 6. Run the Development Server
 Start the server:
 
 ```bash
 
-python manage.py runserver
+python scholarship/manage.py runserver
 ```
 ### 6. Access the Application
 Open your web browser and go to:
