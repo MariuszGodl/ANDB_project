@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}Application submitted – Global Excellence Scholarship{% endblock %}
+
+{% block extra_css %}
+<style>
+    .success-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;      /* pełne wyśrodkowanie w pionie */
+        padding: 40px 20px;
+    }
+
+    .success-card {
+        max-width: 600px;
+        width: 100%;
+        background: #ffffff;
+        padding: 30px 35px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        text-align: left;
+    }
+
+    .success-title {
+        font-size: 28px;
+        margin-bottom: 10px;
+        color: #003366;
+    }
+
+    .success-text {
+        font-size: 15px;
+        color: #444;
+        margin-bottom: 25px;
+    }
+
+    .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .btn-primary {
+        background-color: #2563eb;
+        color: #fff;
+        padding: 10px 22px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .btn-primary:hover {
+        background-color: #1d4ed8;
+    }
+
+    .btn-secondary {
+        background-color: transparent;
+        color: #2563eb;
+        padding: 10px 22px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        border: 1px solid #2563eb;
+    }
+
+    .btn-secondary:hover {
+        background-color: #e0ecff;
+    }
+
+    /* Additions: small styles for application reference and copy button */
+    .ref-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+    }
+
+    .ref-label {
+        font-size: 14px;
+        color: #333;
+        font-weight: 600;
+    }
+
+    .ref-code {
+        background: #f3f4f6;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+        font-weight: 600;
+        color: #0f172a;
+    }
+
+    .copy-btn {
+        background: #eef2ff;
+        color: #3730a3;
+        padding: 8px 10px;
+        border-radius: 6px;
+        border: 1px solid #6366f1;
+        cursor: pointer;
+        font-weight: 600;
+    }
+    .copy-btn:active {
+        transform: translateY(1px);
+    }
+
+    .copy-feedback {
+        font-size: 13px;
+        color: #065f46;
+        margin-left: 8px;
+    }
+
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="success-wrapper">
+    <div class="success-card">
+        <h1 class="success-title">Thank you!</h1>
+        <p class="success-text" aria-live="polite">
+            Your scholarship application has been successfully submitted and saved in our system.
+            Our admissions team will review it and contact you via email.
+        </p>
+
+        {# New: optional application reference and copy button #}
+        {% if application_id %}
+        <div class="ref-row" role="group" aria-label="Application reference">
+            <div class="ref-label">Application reference</div>
+            <div id="app-ref" class="ref-code" aria-live="polite">{{ application_id }}</div>
+            <button type="button" id="copy-btn" class="copy-btn" aria-describedby="copy-feedback">Copy</button>
+            <div id="copy-feedback" class="copy-feedback" aria-hidden="true" style="display:none">Copied</div>
+            <span class="visually-hidden" id="copy-status" aria-live="assertive"></span>
+        </div>
+        {% endif %}
+
+        <div class="actions">
+            <a href="/apply/" class="btn-primary">Submit another application</a>
+            <a href="/" class="btn-secondary">Back to home</a>
+        </div>
+    </div>
+</div>
+
+{# Inline script to keep this change self-contained (small, unobtrusive) #}
+<script>
+(function(){
+    var btn = document.getElementById('copy-btn');
+    var refEl = document.getElementById('app-ref');
+    var feedback = document.getElementById('copy-feedback');
+    var status = document.getElementById('copy-status');
+
+    if (!btn || !refEl) return;
+
+    btn.addEventListener('click', function(){
+        var text = refEl.textContent.trim();
+        if (!text) return;
+        navigator.clipboard?.writeText(text).then(function(){
+            // visual feedback
+            feedback.style.display = 'inline-block';
+            status.textContent = 'Application reference copied to clipboard';
+            btn.textContent = 'Copied';
+            setTimeout(function(){
+                feedback.style.display = 'none';
+                status.textContent = '';
+                btn.textContent = 'Copy';
+            }, 2000);
+        }, function(){
+            // fallback
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'absolute';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                feedback.style.display = 'inline-block';
+                status.textContent = 'Application reference copied to clipboard';
+                btn.textContent = 'Copied';
+                setTimeout(function(){
+                    feedback.style.display = 'none';
+                    status.textContent = '';
+                    btn.textContent = 'Copy';
+                }, 2000);
+            } catch(e) {
+                status.textContent = 'Failed to copy';
+            }
+            document.body.removeChild(textarea);
+        });
+    });
+})();
+</script>
+{% endblock %}
+

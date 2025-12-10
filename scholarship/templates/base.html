@@ -5,27 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Global Excellence Scholarship{% endblock %}</title>
     <style>
-        /* PASTE THE CSS FROM THE PREVIOUS RESPONSE HERE */
-        /* For brevity, I am summarizing the critical CSS setup */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; background-color: #f4f4f9; display: flex; flex-direction: column; min-height: 100vh; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header & nav */
         header { background-color: #003366; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%; max-width: 1200px; margin: 0 auto; }
-        .login-btn { background-color: #f1c40f; color: #003366; padding: 10px 25px; text-decoration: none; font-weight: bold; border-radius: 5px; }
-        .nav-links { list-style: none; display: flex; gap: 30px; }
-        .nav-links a { color: white; text-decoration: none; font-weight: 500; }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .login-btn {
+            background-color: #f1c40f;
+            color: #003366;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .login-btn:hover {
+            background-color: #d4ac0d;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Główny kontener – używany w blokach child */
+        .page-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
         /* Footer */
-        footer { background-color: #222; color: #ddd; padding: 3rem 5%; margin-top: auto; }
-        .footer-content { display: flex; justify-content: space-between; max-width: 1200px; margin: 0 auto; }
-        /* ... Add the rest of the CSS here ... */
+        footer {
+            background-color: #222;
+            color: #ddd;
+            padding: 3rem 5%;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .footer-section p {
+            margin: 0.2rem 0;
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        {% block extra_css %}{% endblock %}
     </style>
 </head>
 <body>
 
     {% include 'parts/navbar.html' %}
 
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
 
     {% include 'parts/footer.html' %}
 
