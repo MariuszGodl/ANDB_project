@@ -1,0 +1,144 @@
+Database overview
+
+This database is used for a scholarship application system. It stores information about students, their scholarship applications, the files they upload as supporting documents, and a basic audit log of important actions. The database is relational and runs on PostgreSQL.
+
+There are four main tables:
+
+    student
+
+    application
+
+    supportingdocument
+
+    auditlog
+
+Tables and fields
+1. student table
+
+Stores basic personal data for each student.
+
+    studentid – integer, primary key, automatically generated.
+
+    firstname – text (up to 100 chars), required; student’s first name.
+
+    lastname – text (up to 100 chars), required; student’s last name.
+
+    email – text (up to 255 chars), required, must be unique; used to identify a student.
+
+    phoneno – text (up to 20 chars), optional; phone number.
+
+    dateofbirth – date, required; must not be in the future.
+
+    address – text (up to 255 chars), required; student’s address.
+
+    createdat – timestamp; when the record was created.
+
+2. application table
+
+Represents one scholarship application submitted by a student.
+
+    applicationid – integer, primary key, automatically generated.
+
+    studentid – integer, required; foreign key pointing to student.studentid.
+
+    status – text (up to 50 chars), required; default is 'Draft'. Allowed values: Draft, Submitted, Under Review, Accepted, Rejected.
+
+    academicyear – integer, required; the academic year of the application (e.g. 2025).
+
+    gpa – decimal(3,2), required; student’s GPA, must be between 0.00 and 5.00.
+
+    essaytext – text, required; the personal statement / essay.
+
+    applicationdate – timestamp; date and time when the application was created.
+
+3. supportingdocument table
+
+Holds information about uploaded files that belong to an application.
+
+    documentid – integer, primary key, automatically generated.
+
+    applicationid – integer, required; foreign key pointing to application.applicationid.
+
+    filename – text (up to 255 chars), required; original name of the file.
+
+    filepath – text (up to 512 chars), required; path to the file on the server (e.g. uploads/myfile.pdf).
+
+    filetype – text (up to 50 chars), required; MIME type like application/pdf.
+
+    filesizekb – integer, required; file size in kilobytes, must be > 0.
+
+    uploaddate – timestamp; when the file was uploaded.
+
+4. auditlog table
+
+Stores simple log entries for important events in the system.
+
+    logid – integer, primary key, automatically generated.
+
+    timestamp – timestamp; when the event was logged.
+
+    eventtype – text (up to 50 chars), required; type of event, e.g. Application Submitted.
+
+    details – text, optional; extra info, for example IDs of related records.
+
+Relationships
+
+    One student can have many applications
+
+        Relationship: student (1) — (N) application
+
+        Implemented by foreign key application.studentid referencing student.studentid.
+
+    One application can have many supporting documents
+
+        Relationship: application (1) — (N) supportingdocument
+
+        Implemented by foreign key supportingdocument.applicationid referencing application.applicationid.
+
+    auditlog is independent
+
+        It is not directly linked with foreign keys, but the details column usually stores IDs of students and applications for reference.
+
+Indexes and constraints
+Primary keys
+
+    student.studentid
+
+    application.applicationid
+
+    supportingdocument.documentid
+
+    auditlog.logid
+
+Each of these uniquely identifies a row in its table.
+Foreign keys
+
+    application.studentid → student.studentid
+    Every application must belong to an existing student.
+
+    supportingdocument.applicationid → application.applicationid
+    Every supporting document must belong to an existing application.
+
+Unique and check constraints
+
+    student.email is unique, so two students cannot have the same email.
+
+    application.status is limited to specific values (Draft, Submitted, Under Review, Accepted, Rejected).
+
+    application.gpa must be between 0.00 and 5.00.
+
+    supportingdocument.filesizekb must be greater than 0.
+
+    student.dateofbirth must not be in the future.
+
+Additional indexes
+
+To speed up common queries:
+
+    Index on student(email) – fast lookup of a student by email.
+
+    Index on application(status) – fast filtering by application status.
+
+    Index on supportingdocument(applicationid) – fast access to documents for a given application.
+
+    Index on auditlog(eventtype) – fast filtering of logs by event type.

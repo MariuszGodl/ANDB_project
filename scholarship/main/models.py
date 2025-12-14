@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
 class Student(models.Model):
     studentid = models.AutoField(primary_key=True)
     firstname = models.CharField(max_length=100)
@@ -12,12 +12,16 @@ class Student(models.Model):
     createdat = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = False            # bo tabele tworzysz SQL-em
         db_table = 'student'
+
+    def __str__(self):
+        return f"{self.firstname} {self.lastname}"
+
 
 class Application(models.Model):
     applicationid = models.AutoField(primary_key=True)
-    studentid = models.ForeignKey('Student', models.DO_NOTHING, db_column='studentid')
+    studentid = models.ForeignKey(Student, models.DO_NOTHING, db_column='studentid')
     status = models.CharField(max_length=50)
     academicyear = models.IntegerField()
     gpa = models.DecimalField(max_digits=3, decimal_places=2)
@@ -27,6 +31,7 @@ class Application(models.Model):
     class Meta:
         managed = False
         db_table = 'application'
+
 
 class Supportingdocument(models.Model):
     documentid = models.AutoField(primary_key=True)
@@ -40,6 +45,7 @@ class Supportingdocument(models.Model):
     class Meta:
         managed = False
         db_table = 'supportingdocument'
+
 
 class Auditlog(models.Model):
     logid = models.AutoField(primary_key=True)
